@@ -1,0 +1,34 @@
+title: Myles' Talks
+
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis justo porta ullamcorper accumsan. Donec tristique sapien ex, in cursus lectus egestas malesuada.
+
+baseurl: ""
+url: 'https://talks.mylesb.ca/'
+
+author:
+  name: Myles Braithwaite
+  email: me@mylesb.ca
+  twitter: mylesb
+
+# Jekyll Assets settings
+assets:
+  compress:
+    css: true
+    js: true
+  prefix: '/static'
+
+# Build settings
+permalink: /:year-:month-:day-:slug/
+
+future: true
+
+markdown: kramdown
+
+gems:
+  - jekyll-feed
+  - jekyll-assets
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock

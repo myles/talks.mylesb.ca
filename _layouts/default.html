@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+        {% css style %}
+    </head>
+
+    <body id="talks-mylesb-ca" class="bg-faded">
+        {% if page.id %}
+        {% include navbar.html %}
+        {% endif %}
+
+        {% include page-header.html %}
+
+        {% mark_old_posts 18 months ago %}
+
+        {{ content }}
+
+        {% include page-footer.html %}
+    </body>
+</html>

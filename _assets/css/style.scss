@@ -1,0 +1,68 @@
+$brand-primary: rgb(29, 80, 141);
+
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+@import 'bootstrap/normalize';
+@import 'bootstrap/reboot';
+@import 'bootstrap/type';
+@import 'bootstrap/images';
+@import 'bootstrap/grid';
+@import 'bootstrap/nav';
+@import 'bootstrap/navbar';
+@import 'bootstrap/card';
+@import 'bootstrap/alert';
+@import 'bootstrap/responsive-embed';
+@import 'bootstrap/utilities';
+
+html {
+  background-color: $brand-primary;
+}
+
+.page-header {
+  background-color: $brand-primary;
+  color: $white;
+  margin-bottom: $spacer;
+  padding: 3em 0;
+
+  &__title {
+    font-size: $display3-size;
+    font-weight: $display3-weight;
+  }
+
+  &__tease {
+    color: lighten($brand-primary, 30);
+    font-size: $font-size-h4;
+    font-weight: $lead-font-weight;
+  }
+}
+
+.page-footer {
+  background-color: $brand-primary;
+  color: $white;
+  margin-top: $spacer;
+  padding: 2em 0;
+  text-align: center;
+
+  &__link {
+    color: darken($white, 10);
+
+    @include hover-focus {
+      color: darken($white, 20);
+    }
+  }
+}
+
+.card {
+  display: block;
+}
+
+.heart {
+  height: 1.5em;
+  vertical-align: middle;
+  width: 1.5em;
+
+  &__property-fill {
+    fill: $red;
+    stroke: $red;
+  }
+}

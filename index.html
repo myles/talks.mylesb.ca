@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<div class="card-columns">
+{% for post in site.posts %}
+
+    <a href="{{ post.url }}" class="card">
+        {% if post.feature_image %}
+        <img class="card-img-top img-fluid" src="{{ post.url }}{{ post.feature_image }}" alt="{{ post.title }}">
+        {% endif %}
+
+        <div class="card-block">
+            <h4 class="card-title">{{ post.title }}</h4>
+
+            {% if post.tags %}
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ post.tags | array_to_sentence_string }}
+            </h6>
+            {% endif %}
+
+            {% if post.tease %}
+            <p class="card-text">{{ post.tease }}</p>
+            {% endif %}
+        </div>
+
+        <div class="card-footer">
+            <small class="text-muted">At {{ post.at.name }} on {{ post.date | date: "%-d %B %Y" }}</small>
+        </div>
+    </a>
+
+{% endfor %}
+</div>

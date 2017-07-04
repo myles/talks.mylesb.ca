@@ -1,0 +1,20 @@
+<header class="page-header">
+    <div class="page-header__wrapper container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header__title">
+                {% if page.title %}
+                    {{ page.title }}
+                {% else %}
+                    {{ site.title }}
+                {% endif %}
+                </h1>
+
+                {% if page.tease %}
+                <p class="page-header__tease">{{ page.tease }}</p>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</header>
