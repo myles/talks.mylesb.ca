@@ -1,0 +1,32 @@
+---
+layout: null
+---
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": {{ site.title | jsonify }},
+  "home_page_url": {{ '/' | absolute_url | jsonify }},
+  "feed_url": {{ '/feed.json' | absolute_url | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "icon": {{ '/apple-touch-icon.png' | absolute_url | jsonify }},
+  "favicon": {{ '/favicon.ico' | absolute_url | jsonify }},
+  "expired": false,
+  "items": [
+    {% for post in site.posts limit:36 %}
+    {
+      "id": {{ post.url | absolute_url | sha1 | jsonify }},
+      "title": {{ post.title | jsonify }},
+      {% if post.tease %}"summary": {{ post.tease | jsonify }},{% endif %}
+      "content_html": {{ post.content | strip_newlines | jsonify }},
+      "content_text": {{ post.content | strip_html | strip_newlines | jsonify }},
+      "url": "{{ post.url | absolute_url }}",
+      "image": {{ post.url | absolute_url | append: post.feature_image | jsonify }},
+      {% if post.tags.size > 1 %}"tags": {{ post.tags | jsonify }},{% endif %}
+      "date_published": {{ post.date | date_to_xmlschema | jsonify }},
+      "date_modified": {{ post.date | date_to_xmlschema | jsonify }}
+    }{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ],
+  {% if site.author %}
+  "author": {{ site.author | jsonify }}
+  {% endif %}
+}

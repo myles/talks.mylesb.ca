@@ -7,6 +7,7 @@ url: 'https://talks.mylesb.ca/'
 
 author:
   name: Myles Braithwaite
+  url: https://mylesb.ca/
   email: me@mylesb.ca
   twitter: mylesb
 
@@ -32,3 +33,4 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
