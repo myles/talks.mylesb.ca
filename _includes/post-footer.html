@@ -1,0 +1,19 @@
+<div class="post-footer">
+    <div class="container">
+        <div class="post-footer__avatar">
+            {% asset 'avatar.svg' %}
+        </div>
+
+        <h1 class="post-footer__author">{{ site.author.name }}</h1>
+
+        <div class="post-footer__description">
+            {{ site.author.description | markdownify }}
+        </div>
+
+        <nav class="post-footer__nav nav justify-content-center">
+            <a class="nav-link" href="{{ site.author.url }}">Homepage</a>
+            <a class="nav-link" href="mailto:{{ site.author.email }}">Email</a>
+            <a class="nav-link" href="https://twitter.com/{{ site.author.twitter }}">Twitter</a>
+        </nav>
+    </div>
+</div>

@@ -18,6 +18,39 @@ html {
   background-color: $brand-primary;
 }
 
+.post-footer {
+  border-top: #EBF2F6 1px solid;
+  margin: 6rem 0 0;
+  padding: 3rem 0 0;
+  position: relative;
+
+  &__avatar {
+    position: absolute;
+    top: -2em;
+    left: 50%;
+    margin-left: -2em;
+    overflow: hidden;
+    padding: 6px;
+    z-index: 2;
+
+    svg {
+      @include size(4em);
+      @include border-radius(.3em);
+
+      background-color: $brand-primary;
+      padding: .3em .3em 0;
+    }
+  }
+
+  &__author {
+    font-size: 1rem;
+  }
+
+  &__description {
+    margin-top: 2em;
+  }
+}
+
 .page-header {
   background-color: $brand-primary;
   color: $white;
