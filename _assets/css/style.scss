@@ -56,10 +56,30 @@ html {
   display: block;
 }
 
+.nav-link {
+  &--icon {
+    svg {
+      @include size(1.5em);
+
+      vertical-align: middle;
+
+      * {
+        fill: $navbar-light-color;
+      }
+    }
+
+    @include hover-focus {
+      svg * {
+        fill: $navbar-light-hover-color;
+      }
+    }
+  }
+}
+
 .heart {
-  height: 1.5em;
+  @include size(1.5em);
+
   vertical-align: middle;
-  width: 1.5em;
 
   &__property-fill {
     fill: $red;

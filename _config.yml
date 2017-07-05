@@ -1,6 +1,6 @@
 title: Myles' Talks
 
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis justo porta ullamcorper accumsan. Donec tristique sapien ex, in cursus lectus egestas malesuada.
+description: Different technical talks I have given.
 
 baseurl: ""
 url: 'https://talks.mylesb.ca/'
@@ -34,3 +34,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - fabfile.py
+  - fabfile.pyc
