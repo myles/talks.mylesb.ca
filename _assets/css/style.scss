@@ -1,18 +1,6 @@
 $brand-primary: rgb(29, 80, 141);
 
-@import 'bootstrap/variables';
-@import 'bootstrap/mixins';
-@import 'bootstrap/normalize';
-@import 'bootstrap/reboot';
-@import 'bootstrap/type';
-@import 'bootstrap/images';
-@import 'bootstrap/grid';
-@import 'bootstrap/nav';
-@import 'bootstrap/navbar';
-@import 'bootstrap/card';
-@import 'bootstrap/alert';
-@import 'bootstrap/responsive-embed';
-@import 'bootstrap/utilities';
+@import' bootstrap/bootstrap';
 
 html {
   background-color: $brand-primary;
@@ -24,14 +12,23 @@ html {
   padding: 3rem 0 0;
   position: relative;
 
+  &__container {
+    max-width: 540px;
+  }
+
   &__avatar {
-    position: absolute;
-    top: -2em;
-    left: 50%;
-    margin-left: -2em;
-    overflow: hidden;
-    padding: 6px;
-    z-index: 2;
+    display: none;
+
+    @include media-breakpoint-up('sm') {
+      display: block;
+      left: 50%;
+      margin-left: -2em;
+      overflow: hidden;
+      padding: 6px;
+      position: absolute;
+      top: -2em;
+      z-index: 2;
+    }
 
     svg {
       @include size(4em);
