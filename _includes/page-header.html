@@ -1,7 +1,7 @@
 <header class="page-header">
     <div class="page-header__wrapper container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <h1 class="page-header__title">
                 {% if page.title %}
                     {{ page.title }}
@@ -9,12 +9,15 @@
                     {{ site.title }}
                 {% endif %}
                 </h1>
-
-                {% if page.tease %}
-                <p class="page-header__tease">{{ page.tease }}</p>
-                {% endif %}
-                </p>
             </div>
         </div>
+
+        {% if page.tease %}
+        <div class="row">
+            <div class="col-md-6">
+                <p class="page-header__tease">{{ page.tease }}</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </header>

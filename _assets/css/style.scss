@@ -1,6 +1,6 @@
 $brand-primary: rgb(29, 80, 141);
 
-@import' bootstrap/bootstrap';
+@import 'bootstrap/bootstrap';
 
 html {
   background-color: $brand-primary;
@@ -64,6 +64,16 @@ html {
     font-size: $font-size-h4;
     font-weight: $lead-font-weight;
   }
+
+  &__meta {
+    color: lighten($brand-primary, 30);
+    font-size: $font-size-h4;
+    font-weight: $lead-font-weight;
+
+    a {
+      color: lighten($brand-primary, 40);
+    }
+  }
 }
 
 .page-footer {
@@ -83,7 +93,14 @@ html {
 }
 
 .card {
+  color: $body-color;
   display: block;
+
+  &:hover {
+    @include card-variant(#e9ecef, #ced4da);
+
+    text-decoration: none;
+  }
 }
 
 .nav-link {
