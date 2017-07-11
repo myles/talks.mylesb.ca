@@ -20,6 +20,7 @@ def jekyll(command, *args, **kwargs):
 
 @task
 def build():
+    local('rm -r ./_site/')
     jekyll('build')
 
 

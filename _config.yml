@@ -18,6 +18,7 @@ assets:
     css: true
     js: true
   prefix: '/static'
+  digest: true
 
 # Build settings
 permalink: /:year-:month-:day-:slug/
