@@ -1,4 +1,4 @@
-from fabric.api import env, local, task
+from fabric.api import env, local, puts, task
 from fabric.contrib.project import rsync_project
 
 env.user = 'myles_myles-talks'
@@ -35,3 +35,14 @@ def deploy():
 
     rsync_project(remote_dir='/home/public/', local_dir='./_site/',
                   delete=True)
+
+    # Draw a ship
+    puts("               |    |    |               ")
+    puts("              )_)  )_)  )_)              ")
+    puts("             )___))___))___)\            ")
+    puts("            )____)____)_____)\\          ")
+    puts("          _____|____|____|____\\\__      ")
+    puts(" ---------\                   /--------- ")
+    puts("   ^^^^^ ^^^^^^^^^^^^^^^^^^^^^           ")
+    puts("     ^^^^      ^^^^     ^^^    ^^        ")
+    puts("          ^^^^      ^^^                  ")
