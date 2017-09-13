@@ -1,7 +1,5 @@
 // sass-lint:disable no-ids, class-name-format, placeholder-in-extend, no-important
 
-@import 'bootstrap/bootstrap';
-
 #notebook {
   .anchor-link {
     display: none;
@@ -9,11 +7,17 @@
 
   .cell {
     border-bottom: 1px solid $gray-lightest;
-    margin-bottom: .5rem;
+    margin-bottom: 1em;
   }
 
   .text_cell {
     @include make-row;
+
+    .rendered_html {
+      img {
+        max-width: 100%;
+      }
+    }
   }
 
   .code_cell {
