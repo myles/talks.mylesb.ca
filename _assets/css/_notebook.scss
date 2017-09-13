@@ -1,0 +1,61 @@
+// sass-lint:disable no-ids, class-name-format, placeholder-in-extend, no-important
+
+@import 'bootstrap/bootstrap';
+
+#notebook {
+  .anchor-link {
+    display: none;
+  }
+
+  .cell {
+    border-bottom: 1px solid $gray-lightest;
+    margin-bottom: .5rem;
+  }
+
+  .text_cell {
+    @include make-row;
+  }
+
+  .code_cell {
+    .input,
+    .output_area {
+      @include make-row;
+    }
+  }
+
+  .prompt {
+    @include make-col-ready;
+    @include make-col(1);
+  }
+
+  .inner_cell,
+  .output_subarea {
+    @include make-col-ready;
+    @include make-col(11);
+  }
+
+  .output_stream {
+    max-height: 50vh;
+    overflow: auto;
+  }
+
+  .output_html {
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .dataframe {
+    @extend .table;
+    @extend .table-striped;
+
+    border: 0 !important;
+
+    thead {
+      @extend .thead-default;
+
+      tr {
+        text-align: left !important;
+      }
+    }
+  }
+}
