@@ -1,0 +1,20 @@
+---
+layout: post
+
+date: 2015-03-10
+
+title: jrnl
+
+at:
+  name: GTALUG
+  type: meetup
+  link: http://gtalug.org/meeting/2015-03/
+
+tags: []
+
+category: lightning
+
+source: https://github.com/myles/2015-03-10-jrnl
+---
+
+`jrnl` is a command line based journalling application.

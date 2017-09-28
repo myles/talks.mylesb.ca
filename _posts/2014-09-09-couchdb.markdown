@@ -1,0 +1,20 @@
+---
+layout: post
+
+date: 2014-09-09
+
+title: CouchDB
+
+at:
+  name: GTALUG
+  type: meetup
+  link: http://gtalug.org/meeting/2014-09/
+
+tags: []
+
+category: lightning
+
+source: https://github.com/myles/2014-09-09-couchdb
+---
+
+CouchDB is a document oriented database.
