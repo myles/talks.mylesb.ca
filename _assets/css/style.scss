@@ -92,9 +92,18 @@ html {
   }
 }
 
+.card-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .card {
   color: $body-color;
   display: block;
+  margin: .5rem 1rem;
+  width: 32rem;
 
   &:hover {
     @include card-variant(#e9ecef, #ced4da);
