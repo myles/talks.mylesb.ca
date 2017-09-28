@@ -1,15 +1,15 @@
 ---
 layout: default
 
-date: 2017-09-12 19:30
+date: 2017-09-13 19:30
 
 title: The Art of Web Scraping
 tease: My experences in Web Scraping all summer.
 
 at:
-  name: GTALUG
+  name: Python Toronto
   type: meetup
-  link: 'https://gtalug.org/meeting/2017-09/'
+  link: 'https://www.meetup.com/preview/Python-Toronto/events/243121180'
 
 tags:
   - Web Scraping
@@ -18,21 +18,12 @@ category: talk
 
 feature_image: /media/gdp-country-1999-2016.png
 
-source: https://github.com/myles/2017-09-12-gtalug-web-scraping
+source: https://github.com/myles/2017-09-13-python-toronto-web-scraping
 ---
 
 <div tabindex="-1" id="notebook" class="border-box-sizing">
   <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="{{ page.url }}/media/gtalug-logo.svg" alt=""></p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -121,6 +112,305 @@ source: https://github.com/myles/2017-09-12-gtalug-web-scraping
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.theverge.com/2017/9/11/16286012/android-8-review-o-oreo-update-treble-notifications&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;Forbidden&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span><span class="o">.</span><span class="n">status_code</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>403</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="{{ page.url }}/media/im-getting-something.gif" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">closing</span>
+
+<span class="kn">from</span> <span class="nn">selenium.webdriver</span> <span class="k">import</span> <span class="n">Firefox</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="k">import</span> <span class="n">WebDriverWait</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">Firefox</span><span class="p">())</span> <span class="k">as</span> <span class="n">browser</span><span class="p">:</span>
+  <span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.theverge.com/2017/9/11/16286012/android-8-review-o-oreo-update-treble-notifications&#39;</span><span class="p">)</span>
+
+  <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">browser</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;l-root&#39;</span><span class="p">))</span>
+
+  <span class="n">content</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">page_source</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+  <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;c-page-title&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;c-entry-content&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Android Oreo review: it’s what’s inside that counts
+
+Every year, each review of the new version of Android has to come with a bunch of caveats — and the same applies to Android 8 Oreo. Android reviews are always about the future, not the present. Unlike iOS, you may not get the features you&#39;re reading about here until you buy your next phone. It&#39;s possible that your current phone will be updated, but it is going to take months of waiting and wondering if and when that will happen. The only sure way to get timely updates to Android is to buy a Pixel phone directly from Google.
+Google has tried to convince its partners in the Android ecosystem to solve these update problems over the years with cajoling, shaming, and begging. With Android Oreo, it&#39;s trying a new tactic that feels much more Google-ly: engineering.
+The most important part of Android Oreo is something called Project Treble, but it’s not something you can see and use. Think of it as modularizing and compartmentalizing the guts of Android so that it&#39;s simpler for Google, manufacturers, and carriers to get updates pushed through to you. But this is Android, so it&#39;s not guaranteed to happen.
+In the meantime, there are a few user-facing features worth talking about, even though only a tiny percentage of Android users will get them sometime soon.
+
+
+
+
+
+
+
+
+
+Notifications
+Notification overload is very real. If there&#39;s a screen that&#39;s more valuable than your home screen, it&#39;s your lock screen. So, app developers are shameless in finding ways to get their app to pop up there.
+In Oreo, Google is trying to solve the problem by giving you more options for dealing with these pop-ups. The home screen now features notification dots on your icons, so you can see what&#39;s new, just like on iOS. Unlike the iPhone, however, Google chose not to put any numbers on those dots. You can long-press the icon to see a tiny, truncated version of that app&#39;s notification and swipe it away.
+
+
+
+
+
+
+
+
+
+Dots are nice, I guess, but my favorite new feature in Oreo is the more readable notification shade, which orders your alerts by priority. The &#34;Major Ongoing&#34; alerts for things like playing songs or navigation will be pinned to the top slot, so they don&#39;t get lost. Below that is a section Google calls &#34;People to People,&#34; for messaging alerts. Then, there&#39;s &#34;General&#34; for everything else, and a new section called &#34;BTW&#34; that&#39;s shoved down to the bottom.
+It sounds like a lot, but in practice what you get is a well-ordered list of the stuff you need, easily acted upon right there. If you have a million notifications, the less-important ones are buried at the bottom in that little BTW list that only expands as you scroll down. There&#39;s even a nice little animation as icons pop up from the BTW zone to the main area.
+BTW is also useful because Oreo weirdly demands more notifications from certain apps. Oreo is going to start getting harder on apps that run in the background and apps that put stuff over your screen (like Facebook Messenger&#39;s Chat Heads). Those apps are going to have a bunch of persistent alerts, which sounds awful, but they&#39;ll be hidden away in BTW. Basically, it will mean that apps that hog resources will be called out and you&#39;ll have the option to kill them, but they won&#39;t be called out so loudly that it will annoy you.
+Oreo layers on more functionality, too. Media apps get notifications that dynamically change color to match the theme of cover art, and they look nice. I also like the option to &#34;snooze&#34; notifications like you might do for an email, at least in theory. You can do this by slowly sliding the pane over to tap a little clock icon. Unfortunately, you can&#39;t snooze anything for more than two hours.
+Then there are &#34;Notification Channels,&#34; which is an utterly confusing new array of notification options for apps. Basically, an app can tell Android that it has multiple types of notifications — like marketing, messaging, reminders, whatever — and allow you to set up different notification rules for each category. It&#39;s a nice idea, but we&#39;re already suffering from notification management fatigue and just giving users a million more settings options seems like the wrong solution. App developers also need to opt in to this new system, to boot.
+Android has always been great at letting you jam through notifications quickly. You can scroll and swipe away stuff you don&#39;t care about, reply directly inline, and the lock screen is always the exact same as the real notification shade. Notifications are still grouped by app, so the ones that send a lot are collapsed to just a couple lines; you can just expand it to see them all.
+Notifications are awful, but Android does a much better job than iOS of helping you deal with them quickly. In fact, it&#39;s stunning to me that Apple doesn&#39;t borrow more of Android&#39;s behavior. That lead is extended in Oreo, though I suspect the vast majority of users won&#39;t bother with some of the new advanced features here.
+
+
+
+
+
+
+
+
+
+Refinements and other features
+You won&#39;t get lost in the new UI changes in Oreo, but you will notice that nearly everything around the core OS has been nipped, tucked, and generally cleaned up. The Quick Settings area at the top of the notification shade is white now. The main settings app has been simplified to a much shorter list of top-level options. And Google has blessedly decided it&#39;s okay to have stuff like the sleep timeout available in multiple places so you won&#39;t have to hunt for it as often.
+
+
+
+
+
+
+
+
+
+There are new emoji. They are not blobs. There&#39;s apparently a whole design system for this new emoji to make it faster and easier for Google to create new ones. The new emoji are closer in appearance to how they look on other platforms, so there will be less confusion, I suppose. But they have less charm than the old blobs.
+I’m one with the blob, the blob is me ༼ つ ◕_◕ ༽つ.
+The Pixel home screen is relatively unchanged, but long-pressing an icon shows those aforementioned notifications and gives you an option to directly access that app&#39;s widgets. You can also still drag shortcuts out of that little pop-up, one of Android&#39;s least-appreciated features. Icons are &#34;adaptive&#34; now, which means they can change their shape to fit whatever theme you have on the home screen. Of course, that requires app developers to update them, and if my home screen is any indication, that&#39;ll take awhile.
+Although the Google App isn&#39;t technically a core part of Oreo, allow me a brief aside to point out that Google is still constantly playing around with how to Google on Android. And I feel like the company is pulling a Samsung: quietly burying or killing features that were once highly touted as the future.
+The biggest example is Google Now, which we might as well call Google Then. Now was the name for Google&#39;s ability to provide you with ambient, contextual information before you knew you needed it. It would tell you when to leave for work, where your packages were, and even read your screen when you asked so it could intelligently figure out what you wanted to do next.
+
+
+
+
+
+
+
+
+
+All those features are still on the phone, but they&#39;ve been buried or moved somewhere else. Swipe over from the home screen and the Google App defaults to showing you a feed of news instead of a personalized list of your ambient notification cards, which are hidden away under a new button. The Google Assistant does have a persistent &#34;What&#39;s on my screen&#34; button, but it no longer really feels like it&#39;s trying to do as much.
+That Google would rather show a news feed by default than a personalized feed of directly relevant information based on my personal data is telling. It tells me that making Now cards relevant is a harder nut to crack than finding news stories based on what I&#39;ve searched for. It also tells me that Google is still trying to find a way to make something as compelling as the Facebook News Feed. Good luck with that!
+Still, there is a lot of machine learning in Oreo. Google says it&#39;ll automatically try to select the right amount of text when you&#39;re trying to grab a phone number or address, for example. Wi-Fi can automatically turn itself back on when it&#39;s close to a trusted network. Android knows which passwords you have saved and can use them to autofill apps when you need to log in to them. It also makes it easier for password manager apps, such as LastPass and 1Password, to fill in password fields automatically for you, which, in theory, should encourage more people to use a password manager.
+Lastly, there&#39;s finally a picture-in-picture mode, which you trigger by hitting the home button when a video (or video call) is playing. However, app support for the feature is scattershot at best. You need to have YouTube Red, for example, to get YouTube videos to do it, but Netflix, HBO Now, and even Google Play Movies don&#39;t support it yet.
+
+
+
+
+
+
+
+
+
+Corralling the ecosystem with code
+The most work done in Oreo isn&#39;t user-facing, though. It&#39;s all about a bunch of features designed to finally enforce better practices on other engineers: the ones who make apps and the ones who make Android devices themselves.
+Project Treble is all about making it easier for Google to reduce the amount of time it takes for an Android update to get approved and pushed out to existing devices. Google calls it &#34;a modular base for Android.&#34; That means that Google is drawing sharper boundaries around what Android manufacturers like Samsung and LG can do.
+It&#39;s very easy — and actually pretty fascinating — to get into the weeds of what Treble is, how it works, and what its implications are. If you want to go deep, I highly recommend you read Ron Amadeo&#39;s analysis at Ars Technica. For our purposes, I&#39;ll just give the high level.
+On every version of Android to date, Google would make a version; then it would need to be made to work with processors; then an OEM would customize it; then everybody listed would certify it worked; and lastly, carriers would certify it. That is a lot of gatekeepers and a lot of steps. Treble makes Android modular, which collapses a bunch of those early steps and makes the later ones go faster.
+
+Oreo: A modular operating system named after a modular cookie
+
+
+
+
+
+
+
+Image: Google
+
+
+
+With Treble, Google puts out a new version of Android that could theoretically work on any device, and it forces all of the customizations that OEMs make into separate boxes that interact with Android itself in standardized ways. So, if Google wants to push out an update, Google pushes out an update and it should &#34;just work.&#34;
+We won&#39;t know for at least a year if that promise will become a reality. I want to be optimistic, but everything else Google has done to try to resolve the update problem has pretty much flopped, so there&#39;s plenty of reason to be skeptical.
+In the meantime, enjoy this little tidbit: not only are you going to wait for Oreo updates for your phones, but you&#39;ll also need to ask whether or not the update is &#34;trebleized.&#34; It&#39;s possible for Android phone updates to 8 to forgo this modular system. (Apparently it&#39;s a lot of work to port over.) All new phones on Oreo will be &#34;trebleized,&#34; at least.
+Google is finding other ways to reduce the persistent problems we&#39;ve seen with Android. Specifically, Android is getting much more rigorous about tamping down battery-killing background apps. This isn&#39;t Google&#39;s first go-round at attacking this problem, but this time it&#39;s being more aggressive. Apps running constantly in the background are forced to throw up a notification into that BTW zone, and even those that just intermittently wake up need to follow more stringent rules about when they can do so.
+As Ars’ Amadeo notes, a lot of these new fixes only really apply to apps that &#34;target&#34; the new version of Android, although some of the new rules will apply to all apps. As ever with Android updates, we are forced to talk about possible futures instead of the actual present.
+
+
+
+
+
+
+
+
+
+The biggest implications from Oreo will take a long time to come to fruition. The improvements to the update system and taming unruly apps will require people who don&#39;t work at Google to play ball. As I said, I would like to be optimistic, and it does appear that Google is building incentives directly into the code to make things better.
+To put some of that gloom in context, there are bright spots in the Android update story. Many more devices than ever before are getting monthly security updates from Google. Some of the best features of Android are now coming directly from updates provided by the Google Play Store. So, even if you don&#39;t get Android Oreo, you will still get a better phone over time.
+As for actual user-facing features, I like the notifications and all of the subtle improvements in Oreo. It just feels a little more cleaned up than previous versions. Although I think the Android notification system is great, I feel like Google should try harder to apply some of those machine learning chops to the problem, rather than ask users to hunt down checkboxes to customize it themselves.
+Android is the most-used operating system on the planet, and it needs to support a stunning array of devices that range from less than 40 bucks to over a thousand. At that scale and with that much diversity, it&#39;s no wonder that Google decided to slow down on user-facing features and give some attention to the core.
+Since this is an Android update, we won&#39;t know how solid — and how flexible — that core is for some time.
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Being-a-Good-Web-Citizen">Being a Good Web Citizen<a class="anchor-link" href="#Being-a-Good-Web-Citizen">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -197,133 +487,133 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
 &lt;tr class=&#34;table-chart-thead-tr&#34;&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link table-chart-sort-link-active&#34; href=&#34;&#34;&gt;
-   Location ▾
+   Location ▾
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 1999
+   ▾ 1999
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2000
+   ▾ 2000
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2001
+   ▾ 2001
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2002
+   ▾ 2002
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2003
+   ▾ 2003
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2004
+   ▾ 2004
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2005
+   ▾ 2005
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2006
+   ▾ 2006
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2007
+   ▾ 2007
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2008
+   ▾ 2008
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2009
+   ▾ 2009
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2010
+   ▾ 2010
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2011
+   ▾ 2011
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2012
+   ▾ 2012
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2013
+   ▾ 2013
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2014
+   ▾ 2014
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2015
+   ▾ 2015
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
  &lt;/th&gt;
  &lt;th class=&#34;table-chart-thead-th&#34; scope=&#34;column&#34;&gt;
   &lt;a class=&#34;table-chart-sort-link&#34; href=&#34;&#34;&gt;
-   ▾ 2016
+   ▾ 2016
   &lt;/a&gt;
   &lt;div class=&#34;table-chart-sticky-header-spacer&#34;&gt;
   &lt;/div&gt;
@@ -357,67 +647,67 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 588
+   12 588
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 969
+   13 969
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 430
+   15 430
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 109
+   17 109
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 009
+   18 009
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 900
+   16 900
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 700
+   18 700
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 075
+   20 075
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 064
+   20 064
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 704
+   20 704
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 308
+   20 308
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 982
+   20 982
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   20 452
+   20 452
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -427,92 +717,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 804
+   26 804
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 006
+   28 006
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 180
+   29 180
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 413
+   30 413
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 912
+   31 912
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 467
+   33 467
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 165
+   35 165
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 186
+   37 186
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 884
+   38 884
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 250
+   39 250
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 864
+   40 864
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 014
+   42 014
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 436
+   43 436
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 904
+   42 904
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 839
+   46 839
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 581
+   46 581
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 894
+   46 894
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   47 770
+   47 770
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -522,92 +812,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 548
+   27 548
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 301
+   29 301
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 725
+   29 725
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 119
+   31 119
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 000
+   32 000
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 660
+   33 660
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 878
+   34 878
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 459
+   37 459
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 152
+   39 152
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 058
+   41 058
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 713
+   40 713
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 918
+   41 918
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 254
+   44 254
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 254
+   46 254
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 734
+   47 734
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 603
+   48 603
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 440
+   49 440
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   50 125
+   50 125
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -617,92 +907,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 651
+   25 651
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 981
+   27 981
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 041
+   29 041
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 491
+   30 491
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 064
+   31 064
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 274
+   32 274
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 347
+   33 347
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 423
+   35 423
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 871
+   36 871
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 144
+   38 144
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 071
+   38 071
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 176
+   40 176
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 511
+   41 511
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 639
+   42 639
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 757
+   43 757
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 004
+   45 004
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 861
+   45 861
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 701
+   46 701
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -716,87 +1006,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 084
+   9 084
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 314
+   9 314
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 615
+   9 615
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 790
+   9 790
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 506
+   10 506
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 056
+   11 056
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 708
+   11 708
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 607
+   12 607
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 363
+   13 363
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 308
+   13 308
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 340
+   14 340
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 071
+   15 071
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 517
+   15 517
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 117
+   16 117
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 473
+   16 473
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   15 869
+   15 869
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   15 243
+   15 243
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -806,92 +1096,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   5 751
+   5 751
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 373
+   6 373
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 925
+   6 925
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 726
+   7 726
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 343
+   8 343
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 129
+   9 129
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 211
+   10 211
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 320
+   11 320
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 796
+   12 796
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 329
+   14 329
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 161
+   14 161
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 963
+   14 963
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 676
+   15 676
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 208
+   16 208
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 632
+   16 632
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   17 391
+   17 391
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   18 185
+   18 185
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   19 058
+   19 058
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -901,92 +1191,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 746
+   27 746
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 265
+   29 265
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 133
+   30 133
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 855
+   30 855
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 224
+   32 224
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 815
+   33 815
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 213
+   36 213
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 010
+   38 010
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 442
+   39 442
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 278
+   40 278
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 791
+   38 791
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 027
+   40 027
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 565
+   41 565
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 145
+   42 145
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 098
+   44 098
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 082
+   45 082
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 205
+   44 205
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 025
+   44 025
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -996,92 +1286,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 981
+   8 981
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 524
+   9 524
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 920
+   9 920
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 218
+   10 218
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 690
+   10 690
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 692
+   11 692
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 668
+   12 668
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 510
+   15 510
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 755
+   16 755
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 323
+   16 323
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 173
+   16 173
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 249
+   18 249
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 303
+   20 303
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 447
+   21 447
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 353
+   22 353
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 794
+   22 794
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 211
+   23 211
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 478
+   23 478
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1091,87 +1381,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   2 650
+   2 650
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   2 919
+   2 919
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 212
+   3 212
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 537
+   3 537
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 946
+   3 946
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   4 441
+   4 441
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   5 077
+   5 077
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   5 869
+   5 869
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 846
+   6 846
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 616
+   7 616
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 353
+   8 353
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 310
+   9 310
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 360
+   10 360
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 323
+   11 323
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 338
+   12 338
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 388
+   13 388
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 388
+   14 388
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
@@ -1189,87 +1479,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 603
+   6 603
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 780
+   6 780
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 968
+   6 968
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 294
+   7 294
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 797
+   7 797
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 325
+   8 325
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 046
+   9 046
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 810
+   9 810
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 235
+   10 235
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 360
+   10 360
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 776
+   10 776
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 587
+   11 587
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 136
+   12 136
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   12 787
+   12 787
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 405
+   13 405
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 782
+   13 782
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   14 130
+   14 130
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1279,87 +1569,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 789
+   6 789
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 217
+   7 217
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 558
+   7 558
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 836
+   7 836
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 398
+   8 398
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 987
+   8 987
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 695
+   9 695
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 743
+   10 743
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 890
+   11 890
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 399
+   12 399
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 348
+   12 348
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-b&#34;&gt;
-   12 731
+   12 731
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 429
+   13 429
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 209
+   14 209
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 523
+   14 523
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 264
+   15 264
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 422
+   16 422
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
@@ -1377,87 +1667,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   10 747
+   10 747
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   11 695
+   11 695
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   12 669
+   12 669
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   13 533
+   13 533
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   14 524
+   14 524
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   15 308
+   15 308
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   17 433
+   17 433
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   19 294
+   19 294
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 818
+   20 818
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 021
+   20 021
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 750
+   19 750
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 676
+   20 676
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 129
+   21 129
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 653
+   21 653
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 956
+   21 956
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 595
+   22 595
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 642
+   23 642
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1467,92 +1757,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 662
+   19 662
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 276
+   21 276
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 925
+   22 925
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 557
+   23 557
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 252
+   24 252
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 939
+   25 939
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 763
+   27 763
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 001
+   30 001
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 837
+   32 837
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 824
+   34 824
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 923
+   33 923
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 295
+   33 295
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 192
+   33 192
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 878
+   31 878
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 583
+   30 583
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 456
+   30 456
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   31 514
+   31 514
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   32 307
+   32 307
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1562,92 +1852,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 326
+   15 326
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 151
+   16 151
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 582
+   17 582
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 182
+   18 182
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 410
+   19 410
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 794
+   20 794
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 907
+   21 907
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 726
+   23 726
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 054
+   26 054
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 724
+   27 724
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 502
+   27 502
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 608
+   27 608
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 796
+   28 796
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 051
+   29 051
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 496
+   30 496
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 359
+   32 359
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 058
+   34 058
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 127
+   35 127
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1657,92 +1947,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 658
+   26 658
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 649
+   28 649
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 527
+   29 527
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 640
+   30 640
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 788
+   30 788
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 941
+   32 941
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 153
+   34 153
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 319
+   37 319
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 963
+   38 963
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 283
+   41 283
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 382
+   40 382
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 088
+   43 088
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 408
+   44 408
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 809
+   44 809
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 743
+   46 743
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 810
+   47 810
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 994
+   48 994
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 810
+   49 810
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1752,92 +2042,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 435
+   8 435
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 385
+   9 385
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 292
+   10 292
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 556
+   11 556
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 021
+   13 021
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 390
+   14 390
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 466
+   16 466
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 214
+   19 214
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 919
+   21 919
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 642
+   22 642
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 505
+   20 505
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 594
+   21 594
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 501
+   24 501
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 973
+   25 973
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 450
+   27 450
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 528
+   28 528
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 131
+   29 131
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 633
+   29 633
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1847,92 +2137,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 927
+   23 927
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 403
+   25 403
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 671
+   26 671
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 659
+   27 659
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 077
+   28 077
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 216
+   29 216
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 235
+   30 235
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 675
+   32 675
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 541
+   34 541
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 883
+   35 883
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 018
+   35 018
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 018
+   36 018
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 405
+   37 405
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 755
+   37 755
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 981
+   38 981
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 031
+   40 031
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 186
+   41 186
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 074
+   42 074
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -1942,92 +2232,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 198
+   21 198
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 594
+   22 594
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 770
+   23 770
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 792
+   24 792
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 387
+   25 387
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 642
+   26 642
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 568
+   27 568
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 839
+   29 839
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 581
+   31 581
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 002
+   33 002
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 235
+   32 235
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 334
+   33 334
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 651
+   34 651
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 180
+   35 180
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 413
+   36 413
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 550
+   37 550
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 712
+   38 712
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 632
+   39 632
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2037,92 +2327,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 769
+   24 769
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 732
+   26 732
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 834
+   27 834
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 567
+   28 567
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 983
+   28 983
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 140
+   31 140
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 993
+   31 993
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 383
+   34 383
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 689
+   37 689
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 969
+   39 969
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 869
+   37 869
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 812
+   38 812
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 683
+   40 683
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 620
+   40 620
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 293
+   41 293
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 504
+   41 504
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 282
+   42 282
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 363
+   43 363
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2132,92 +2422,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 448
+   24 448
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 210
+   26 210
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 698
+   27 698
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 659
+   28 659
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 276
+   28 276
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 190
+   29 190
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 626
+   30 626
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 568
+   32 568
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 177
+   34 177
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 184
+   35 184
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 795
+   34 795
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 057
+   36 057
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 485
+   37 485
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 671
+   37 671
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 515
+   39 515
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 247
+   40 247
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   41 199
+   41 199
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   41 490
+   41 490
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2227,92 +2517,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 580
+   26 580
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 530
+   27 530
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 833
+   28 833
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 654
+   29 654
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 350
+   30 350
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 849
+   31 849
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 414
+   32 414
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 769
+   34 769
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 010
+   37 010
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 663
+   38 663
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 734
+   37 734
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 993
+   39 993
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 693
+   42 693
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 564
+   43 564
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 232
+   45 232
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 195
+   47 195
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 170
+   48 170
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 989
+   48 989
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2322,92 +2612,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 465
+   18 465
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 504
+   19 504
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 012
+   21 012
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 616
+   22 616
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 869
+   23 869
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 455
+   25 455
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 577
+   25 577
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 536
+   28 536
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 280
+   29 280
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 856
+   30 856
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 396
+   30 396
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 203
+   28 203
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   26 141
+   26 141
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   25 284
+   25 284
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   26 098
+   26 098
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   26 431
+   26 431
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   26 358
+   26 358
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   26 691
+   26 691
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2417,92 +2707,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 874
+   10 874
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 843
+   11 843
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 231
+   13 231
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 516
+   14 516
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 418
+   15 418
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 199
+   16 199
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 014
+   17 014
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 230
+   18 230
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 934
+   18 934
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 586
+   20 586
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 573
+   20 573
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 467
+   21 467
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 729
+   22 729
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 998
+   22 998
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 366
+   24 366
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 494
+   25 494
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 446
+   26 446
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 689
+   26 689
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2512,92 +2802,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 412
+   29 412
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 504
+   29 504
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 609
+   31 609
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 187
+   32 187
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 331
+   32 331
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 232
+   35 232
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 074
+   37 074
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 653
+   38 653
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 745
+   40 745
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 417
+   42 417
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 967
+   40 967
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 414
+   38 414
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 466
+   39 466
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 486
+   40 486
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 632
+   42 632
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 290
+   44 290
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 691
+   47 691
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   51 122
+   51 122
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2627,32 +2917,32 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   2 665
+   2 665
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   2 959
+   2 959
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 285
+   3 285
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 612
+   3 612
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   3 742
+   3 742
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   4 114
+   4 114
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
@@ -2690,87 +2980,87 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   5 258
+   5 258
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   5 193
+   5 193
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   5 429
+   5 429
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   5 681
+   5 681
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   5 987
+   5 987
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   6 373
+   6 373
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   6 856
+   6 856
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   7 359
+   7 359
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   7 931
+   7 931
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 465
+   8 465
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 638
+   8 638
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 433
+   8 433
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   8 974
+   8 974
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   9 554
+   9 554
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 110
+   10 110
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 649
+   10 649
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   11 126
+   11 126
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
@@ -2784,92 +3074,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 995
+   26 995
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 162
+   30 162
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 641
+   32 641
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 212
+   35 212
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 232
+   36 232
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 724
+   38 724
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 437
+   40 437
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 270
+   44 270
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 728
+   46 728
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 217
+   44 217
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 629
+   41 629
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 344
+   43 344
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 176
+   45 176
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 469
+   46 469
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 297
+   48 297
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   51 658
+   51 658
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   70 146
+   70 146
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   72 772
+   72 772
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2879,92 +3169,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 557
+   22 557
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 871
+   24 871
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 858
+   24 858
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 106
+   25 106
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 690
+   23 690
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 111
+   25 111
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 709
+   24 709
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 544
+   25 544
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 351
+   27 351
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 253
+   27 253
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 492
+   27 492
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 867
+   28 867
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 539
+   30 539
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 764
+   31 764
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 240
+   34 240
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 945
+   34 945
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 560
+   36 560
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   37 915
+   37 915
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -2974,92 +3264,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 532
+   25 532
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 006
+   27 006
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 994
+   27 994
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 621
+   28 621
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 029
+   29 029
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 387
+   29 387
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 938
+   29 938
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 193
+   32 193
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 781
+   33 781
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 155
+   35 155
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 269
+   34 269
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 752
+   34 752
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 935
+   35 935
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 757
+   35 757
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 885
+   35 885
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 294
+   36 294
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 255
+   37 255
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 147
+   38 147
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3069,92 +3359,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 335
+   25 335
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 798
+   26 798
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 481
+   27 481
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 170
+   28 170
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 887
+   28 887
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 389
+   30 389
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 668
+   31 668
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 062
+   33 062
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 535
+   34 535
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 804
+   34 804
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 103
+   33 103
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 004
+   35 004
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 775
+   35 775
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 214
+   37 214
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 008
+   39 008
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 435
+   39 435
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 737
+   40 737
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   41 534
+   41 534
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3164,92 +3454,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 393
+   16 393
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 083
+   18 083
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 184
+   19 184
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 775
+   20 775
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 375
+   21 375
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 947
+   22 947
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 196
+   24 196
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 828
+   25 828
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 823
+   27 823
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 656
+   28 656
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 320
+   28 320
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 377
+   30 377
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 228
+   31 228
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 097
+   32 097
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 616
+   32 616
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 631
+   33 631
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 422
+   34 422
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   35 751
+   35 751
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3259,92 +3549,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 405
+   7 405
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 013
+   8 013
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 054
+   9 054
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 069
+   10 069
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 025
+   11 025
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 224
+   12 224
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 848
+   13 848
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 759
+   15 759
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 116
+   18 116
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 429
+   19 429
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 887
+   16 887
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 595
+   17 595
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 782
+   19 782
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 260
+   21 260
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 675
+   22 675
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 881
+   23 881
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 902
+   24 902
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 934
+   25 934
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3354,92 +3644,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 822
+   7 822
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 451
+   8 451
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 473
+   9 473
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 494
+   10 494
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 067
+   12 067
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 041
+   13 041
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 526
+   14 526
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 494
+   16 494
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 088
+   19 088
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 744
+   20 744
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 165
+   18 165
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 130
+   20 130
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 854
+   22 854
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 658
+   24 658
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 693
+   26 693
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 154
+   28 154
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 913
+   28 913
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 897
+   29 897
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3449,92 +3739,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   50 527
+   50 527
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   55 221
+   55 221
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   55 980
+   55 980
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   58 709
+   58 709
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   59 952
+   59 952
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   64 039
+   64 039
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   68 141
+   68 141
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   77 949
+   77 949
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   83 825
+   83 825
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   86 592
+   86 592
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   82 290
+   82 290
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   85 680
+   85 680
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   91 814
+   91 814
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   91 527
+   91 527
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   95 352
+   95 352
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   101 466
+   101 466
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   104 243
+   104 243
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   105 768
+   105 768
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3544,92 +3834,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 828
+   16 828
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 277
+   18 277
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 458
+   18 458
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 586
+   19 586
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 781
+   20 781
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 357
+   21 357
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 266
+   22 266
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 241
+   23 241
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 883
+   24 883
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 193
+   26 193
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 168
+   26 168
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 866
+   27 866
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 583
+   28 583
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 428
+   29 428
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 211
+   31 211
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 861
+   33 861
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 836
+   35 836
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 782
+   37 782
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3639,92 +3929,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   9 134
+   9 134
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   9 974
+   9 974
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 076
+   10 076
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 319
+   10 319
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 808
+   10 808
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 438
+   11 438
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 342
+   12 342
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 505
+   13 505
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 132
+   14 132
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 743
+   14 743
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 398
+   14 398
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 143
+   15 143
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 366
+   16 366
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 958
+   16 958
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 225
+   17 225
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   17 973
+   17 973
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   17 894
+   17 894
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   18 583
+   18 583
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3734,92 +4024,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 952
+   28 952
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 580
+   31 580
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 919
+   32 919
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 995
+   33 995
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 706
+   33 706
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 453
+   35 453
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 272
+   37 272
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 633
+   40 633
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 472
+   43 472
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 859
+   45 859
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 102
+   44 102
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 595
+   44 595
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 067
+   46 067
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 716
+   46 716
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 679
+   48 679
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 018
+   49 018
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   50 078
+   50 078
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   51 285
+   51 285
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3829,92 +4119,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 536
+   20 536
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 469
+   21 469
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 396
+   22 396
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 181
+   23 181
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 858
+   23 858
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 004
+   25 004
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 590
+   25 590
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 686
+   27 686
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 309
+   29 309
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 782
+   29 782
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 590
+   30 590
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 176
+   31 176
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 667
+   32 667
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 912
+   32 912
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 024
+   36 024
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 983
+   36 983
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 725
+   37 725
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   38 833
+   38 833
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -3924,92 +4214,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 555
+   30 555
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 928
+   36 928
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 871
+   37 871
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 961
+   37 961
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 530
+   38 530
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 516
+   42 516
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 775
+   47 775
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   54 107
+   54 107
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   55 877
+   55 877
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   61 760
+   61 760
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   55 491
+   55 491
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   58 081
+   58 081
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   62 146
+   62 146
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   65 442
+   65 442
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   67 051
+   67 051
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   65 790
+   65 790
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   62 038
+   62 038
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   59 350
+   59 350
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4019,92 +4309,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   21 027
+   21 027
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   22 452
+   22 452
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 447
+   23 447
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   24 311
+   24 311
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   24 820
+   24 820
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   26 085
+   26 085
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   27 047
+   27 047
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   29 320
+   29 320
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   30 998
+   30 998
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   32 359
+   32 359
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   31 530
+   31 530
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   32 737
+   32 737
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   34 215
+   34 215
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   34 817
+   34 817
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   36 150
+   36 150
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   37 262
+   37 262
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   38 393
+   38 393
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   39 169
+   39 169
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4114,92 +4404,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 699
+   23 699
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   25 184
+   25 184
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   26 018
+   26 018
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   26 833
+   26 833
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   27 634
+   27 634
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   29 134
+   29 134
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   30 530
+   30 530
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   32 535
+   32 535
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   34 084
+   34 084
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   34 916
+   34 916
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   33 962
+   33 962
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   35 282
+   35 282
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   36 628
+   36 628
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   37 577
+   37 577
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   38 895
+   38 895
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   40 059
+   40 059
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   41 155
+   41 155
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   42 013
+   42 013
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4209,92 +4499,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 125
+   10 125
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   10 645
+   10 645
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   11 127
+   11 127
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   11 781
+   11 781
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   12 259
+   12 259
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   13 351
+   13 351
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   13 898
+   13 898
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   15 155
+   15 155
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   16 783
+   16 783
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   18 315
+   18 315
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   19 265
+   19 265
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   20 829
+   20 829
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   22 576
+   22 576
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 542
+   23 542
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   24 422
+   24 422
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   25 392
+   25 392
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   26 529
+   26 529
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   27 464
+   27 464
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4304,92 +4594,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 724
+   17 724
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 872
+   18 872
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 586
+   19 586
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 368
+   20 368
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 840
+   20 840
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 491
+   21 491
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 740
+   22 740
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 670
+   24 670
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 696
+   25 696
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 631
+   26 631
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 496
+   26 496
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 361
+   27 361
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 780
+   26 780
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 454
+   26 454
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 899
+   27 899
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 806
+   28 806
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   29 688
+   29 688
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   30 622
+   30 622
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4399,92 +4689,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   5 636
+   5 636
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   5 876
+   5 876
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   6 507
+   6 507
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 197
+   7 197
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 820
+   7 820
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 138
+   9 138
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 724
+   9 724
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 694
+   11 694
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 443
+   13 443
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 302
+   16 302
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 013
+   16 013
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 181
+   17 181
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 095
+   18 095
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-b&#34;&gt;
-   18 981
+   18 981
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 855
+   19 855
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 774
+   20 774
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   22 048
+   22 048
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   23 406
+   23 406
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4494,92 +4784,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   6 364
+   6 364
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   7 344
+   7 344
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   7 927
+   7 927
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   8 648
+   8 648
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   9 967
+   9 967
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   11 020
+   11 020
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   12 734
+   12 734
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   16 066
+   16 066
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   17 932
+   17 932
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   21 718
+   21 718
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   20 881
+   20 881
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   22 078
+   22 078
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 310
+   24 310
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   25 821
+   25 821
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   26 278
+   26 278
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   25 901
+   25 901
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 720
+   23 720
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 225
+   23 225
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4589,187 +4879,187 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 532
+   27 532
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 860
+   28 860
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 928
+   28 928
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 601
+   28 601
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 500
+   30 500
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 248
+   33 248
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 766
+   35 766
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 855
+   37 855
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 092
+   40 092
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 147
+   43 147
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 073
+   43 073
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 403
+   44 403
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 399
+   48 399
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   50 430
+   50 430
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   51 113
+   51 113
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   52 387
+   52 387
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   53 402
+   53 402
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   54 509
+   54 509
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;table-chart-tbody-tr&#34;&gt;
- &lt;th class=&#34;table-chart-tbody-th&#34; data-id=&##34;SVK&#34; scope=&#34;row&#34; title=&#34;Activate to highlight this location&#34;&gt;
+ &lt;th class=&#34;table-chart-tbody-th&#34; data-id=&#34;SVK&#34; scope=&#34;row&#34; title=&#34;Activate to highlight this location&#34;&gt;
   Slovak Republic
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 702
+   10 702
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 323
+   11 323
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 398
+   12 398
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 290
+   13 290
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 123
+   14 123
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 170
+   15 170
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   16 572
+   16 572
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 813
+   18 813
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 071
+   21 071
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 575
+   23 575
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 949
+   22 949
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 833
+   24 833
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 836
+   25 836
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 654
+   26 654
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 900
+   27 900
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 021
+   29 021
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 915
+   29 915
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   30 619
+   30 619
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4779,92 +5069,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 061
+   17 061
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   18 032
+   18 032
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 000
+   19 000
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   20 300
+   20 300
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 127
+   21 127
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   22 790
+   22 790
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 941
+   23 941
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 765
+   25 765
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 585
+   27 585
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-b&#34;&gt;
-   29 615
+   29 615
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 477
+   27 477
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 790
+   27 790
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 805
+   28 805
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 906
+   28 906
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 803
+   29 803
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 232
+   31 232
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 189
+   32 189
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 425
+   33 425
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4874,92 +5164,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 489
+   7 489
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   7 849
+   7 849
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 117
+   8 117
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 425
+   8 425
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 734
+   8 734
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 261
+   9 261
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 929
+   9 929
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 659
+   10 659
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 369
+   11 369
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 792
+   11 792
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 529
+   11 529
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 847
+   11 847
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 292
+   12 292
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 599
+   12 599
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   12 882
+   12 882
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 081
+   13 081
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   13 342
+   13 342
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   13 229
+   13 229
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -4969,92 +5259,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 916
+   19 916
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   21 524
+   21 524
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 011
+   23 011
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   24 368
+   24 368
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   25 049
+   25 049
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 237
+   26 237
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 696
+   27 696
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 859
+   30 859
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 578
+   32 578
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 442
+   33 442
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 420
+   32 420
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 994
+   31 994
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 072
+   32 072
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 991
+   31 991
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 621
+   32 621
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   33 677
+   33 677
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   34 727
+   34 727
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   36 291
+   36 291
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5064,92 +5354,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 148
+   27 148
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 258
+   29 258
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 702
+   29 702
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   30 588
+   30 588
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 471
+   31 471
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 552
+   33 552
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 967
+   33 967
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 440
+   37 440
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 564
+   40 564
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 854
+   41 854
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 693
+   39 693
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 668
+   41 668
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   43 755
+   43 755
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 725
+   44 725
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   45 673
+   45 673
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 405
+   46 405
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 823
+   47 823
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 076
+   49 076
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5159,92 +5449,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   33 502
+   33 502
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 355
+   35 355
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 606
+   36 606
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 430
+   37 430
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 362
+   37 362
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 879
+   38 879
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 213
+   40 213
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 705
+   44 705
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 222
+   49 222
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   52 097
+   52 097
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   51 429
+   51 429
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   52 728
+   52 728
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   55 919
+   55 919
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   57 591
+   57 591
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   59 788
+   59 788
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   61 228
+   61 228
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   62 500
+   62 500
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-p&#34;&gt;
-   62 895
+   62 895
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5254,92 +5544,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   8 608
+   8 608
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 426
+   9 426
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 103
+   9 103
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 208
+   9 208
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   9 491
+   9 491
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   10 753
+   10 753
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   11 773
+   11 773
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   13 504
+   13 504
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   14 710
+   14 710
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 901
+   15 901
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   15 349
+   15 349
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   17 298
+   17 298
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   19 517
+   19 517
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   20 549
+   20 549
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   22 314
+   22 314
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   23 236
+   23 236
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   24 313
+   24 313
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
-   24 636
+   24 636
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5349,92 +5639,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   23 975
+   23 975
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   26 034
+   26 034
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   27 362
+   27 362
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   28 633
+   28 633
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   29 904
+   29 904
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   31 638
+   31 638
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   32 268
+   32 268
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 344
+   34 344
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 153
+   35 153
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 058
+   36 058
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 412
+   34 412
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   35 745
+   35 745
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 441
+   36 441
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 475
+   37 475
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 030
+   39 030
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   40 719
+   40 719
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 779
+   41 779
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   42 651
+   42 651
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5444,92 +5734,92 @@ Data table for: Gross domestic product (GDP), Total, US dollars/capita, 1999 –
  &lt;/th&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   34 585
+   34 585
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   36 419
+   36 419
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   37 240
+   37 240
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   38 122
+   38 122
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   39 606
+   39 606
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   41 857
+   41 857
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   44 237
+   44 237
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 369
+   46 369
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   47 987
+   47 987
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 330
+   48 330
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   46 930
+   46 930
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   48 303
+   48 303
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   49 719
+   49 719
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   51 388
+   51 388
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   52 726
+   52 726
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   54 651
+   54 651
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   56 420
+   56 420
   &lt;/span&gt;
  &lt;/td&gt;
  &lt;td class=&#34;table-chart-td&#34;&gt;
   &lt;span class=&#34;table-chart-value&#34;&gt;
-   57 591
+   57 591
   &lt;/span&gt;
  &lt;/td&gt;
 &lt;/tr&gt;
@@ -5593,67 +5883,67 @@ Argentina
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 12 588
+ 12 588
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 13 969
+ 13 969
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 15 430
+ 15 430
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 17 109
+ 17 109
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 18 009
+ 18 009
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 16 900
+ 16 900
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 18 700
+ 18 700
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 20 075
+ 20 075
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 20 064
+ 20 064
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 20 704
+ 20 704
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 20 308
+ 20 308
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value&#34;&gt;
- 20 982
+ 20 982
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;td class=&#34;table-chart-td&#34;&gt;
 &lt;span class=&#34;table-chart-value table-chart-has-status-e&#34;&gt;
- 20 452
+ 20 452
 &lt;/span&gt;
 &lt;/td&gt;
 &lt;/tr&gt;
