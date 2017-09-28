@@ -11,15 +11,15 @@
     </head>
 
     <body id="talks-mylesb-ca" class="bg-faded">
-        {% if page.id %}
-        {% include navbar.html %}
-        {% endif %}
+        {% if page.id %}{% include navbar.html %}{% endif %}
 
         {% include page-header.html %}
 
         {% mark_old_posts 18 months ago %}
 
         {{ content }}
+
+        {% if page.id %}{% include post-footer.html post=page %}{% endif %}
 
         {% include page-footer.html %}
     </body>
