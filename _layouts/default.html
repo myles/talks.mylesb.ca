@@ -5,7 +5,6 @@
         <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 
         {% css style %}
-        {% js script %}
 
         {% seo title=false %}
     </head>
@@ -22,5 +21,7 @@
         {% if page.id %}{% include post-footer.html post=page %}{% endif %}
 
         {% include page-footer.html %}
+
+        {% js script %}
     </body>
 </html>

@@ -1,0 +1,19 @@
+---
+layout: post
+
+date: 2017-12-12 20:05
+
+title: How Completing in a CTF Made Me a Better Linux User
+
+at:
+  name: GTALUG
+  type: meetup
+  link: https://gtalug.org/meeting/2017-12/
+
+tags:
+  - CTF
+
+category: lightning
+---
+
+{% include c-embed-youtube.html id='IvYxqeeIydM' %}

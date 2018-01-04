@@ -1,2 +1,6 @@
 //= require jquery
-//= require bootstrap
+//= require jquery.fitvids
+
+$(document).ready(function() {
+  $('#js-fitvids').fitVids();
+});
