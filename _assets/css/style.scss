@@ -109,6 +109,10 @@ html {
     @include card-variant(#e9ecef, #ced4da);
 
     text-decoration: none;
+
+    .card-img-top {
+      opacity: .8;
+    }
   }
 }
 
