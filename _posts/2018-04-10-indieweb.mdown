@@ -19,3 +19,5 @@ feature_image: /slides/1.png
 
 source: https://github.com/myles/2018-04-10-indieweb
 ---
+
+{% include c-embed-speakerdeck.html id='70f433de6f414f68886b59fd9408cf49' %}
