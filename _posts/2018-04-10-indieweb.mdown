@@ -1,0 +1,21 @@
+---
+layout: post
+
+date: 2018-04-10 19:30
+
+title: IndieWeb
+
+at:
+  name: GTALUG
+  type: meetup
+  link: https://gtalug.org/meeting/2018-04/
+
+tags:
+  - IndieWeb
+
+category: lightning
+
+feature_image: /slides/1.png
+
+source: https://github.com/myles/2018-04-10-indieweb
+---
