@@ -22,3 +22,5 @@ source: https://github.com/myles/2018-07-30-pgloader
 ---
 
 I gave a lighting talk on my experence using pgloader for migrating a MySQL database to Postgres and in Data Science.
+
+{% include c-embed-speakerdeck.html id='27f4b58da9b741768171cf70918bbcc3' ratio='0.888888888888889' %}
