@@ -25,12 +25,9 @@ permalink: /:year-:month-:day-:slug/
 
 future: true
 
-markdown: kramdown
+theme: null
 
-gems:
-  - jekyll-feed
-  - jekyll-assets
-  - jekyll-seo-tag
+markdown: kramdown
 
 exclude:
   - Gemfile
@@ -38,3 +35,8 @@ exclude:
   - README.md
   - fabfile.py
   - fabfile.pyc
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

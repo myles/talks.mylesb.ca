@@ -1,12 +1,15 @@
 source "https://rubygems.org"
 ruby RUBY_VERSION
 
-gem "jekyll", "3.4.3"
+gem "jekyll"
 
 group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
+   gem "jekyll-feed"
    gem "jekyll-assets"
    gem "jekyll-seo-tag"
+   # Disabling for now.
+   # gem "jekyll-netlify-headers"
+   # gem "jekyll-netlify-redirects"
 end
 
 gem "chronic"
