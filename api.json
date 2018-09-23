@@ -1,14 +1,14 @@
 ---
 layout: null
 ---
-[
-  {% for post in site.posts limit:10 %}
-  {
-    "id": {{ post.url | absolute_url | sha1 | jsonify }},
-    "title": {{ post.title | jsonify }},
-    "at": {{ post.at | jsonify }},
-    "tags": {{ post.tags | jsonify }},
-    "image": "{{ post.feature_image | prepend: post.url | absolute_url }}"
-  }{% if forloop.last == false %},{% endif %}
-  {% endfor %}
-]
+{
+  "talks": [
+    {% for post in site.posts limit:10 %}{
+      "id": {{ post.url | absolute_url | sha1 | jsonify }},
+      "title": {{ post.title | jsonify }},
+      "at": {{ post.at | jsonify }},
+      "tags": {{ post.tags | jsonify }},
+      "image": "{{ post.feature_image | prepend: post.url | absolute_url }}"
+    }{% if forloop.last == false %},{% endif %}{% endfor %}
+  ]
+}
