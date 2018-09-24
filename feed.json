@@ -19,10 +19,10 @@ layout: null
       "content_html": {{ post.content | strip_newlines | jsonify }},
       "content_text": {{ post.content | strip_html | strip_newlines | jsonify }},
       "url": "{{ post.url | absolute_url }}",
-      "image": {{ post.url | absolute_url | append: post.feature_image | jsonify }},
+      {% if post.feature_image %} "image": {{ post.url | absolute_url | append: post.feature_image | jsonify }},{% endif %}
       {% if post.tags.size > 1 %}"tags": {{ post.tags | jsonify }},{% endif %}
-      "date_published": {{ post.date | date_to_xmlschema | jsonify }},
-      "date_modified": {{ post.date | date_to_xmlschema | jsonify }}
+      {% if post.date_modified %}"date_modified": {{ post.date_modified | date_to_xmlschema | jsonify }},{% endif %}
+      "date_published": {{ post.date | date_to_xmlschema | jsonify }}
     }{% if forloop.last == false %},{% endif %}
     {% endfor %}
   ],
