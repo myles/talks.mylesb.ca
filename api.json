@@ -7,6 +7,7 @@ layout: null
     "title": {{ post.title | jsonify }},
     "at": {{ post.at | jsonify }},
     "tags": {{ post.tags | jsonify }},
-    "image": "{{ post.feature_image | prepend: post.url | absolute_url }}"
+    "image": "{{ post.feature_image | prepend: post.url | absolute_url }}",
+    "datetime": {{ post.date | date_to_xmlschema | jsonify }}
   }{% if forloop.last == false %},{% endif %}{% endfor %}
 ]
